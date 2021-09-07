@@ -6,7 +6,7 @@
 
 ## A web-application to track trash bins and recycling bins.
 
-*Note that you will need to have Node.js installed (This project uses v14.17.6). It is recommended that you install it using nvm: [unix](https://github.com/nvm-sh/nvm#installing-and-updating) / [windows](https://github.com/coreybutler/nvm-windows).*
+*You will need to have Node.js installed (This project uses v14.17.6). Install it using nvm: [unix](https://github.com/nvm-sh/nvm#installing-and-updating) / [windows](https://github.com/coreybutler/nvm-windows).*
 
 
 ## How to work on the code
