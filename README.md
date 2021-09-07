@@ -1,6 +1,6 @@
 # 11282group44
 
-Member 1:
+Member 1: Joseph Somerdin
 \
 Member 2:
 \
