@@ -13,7 +13,7 @@ nvm install 14.17.6
 nvm use 14.17.6
 ```
 
-## How to work on the code
+## How to work on the client-side code
 
 Clone the repository...
 
@@ -24,7 +24,7 @@ git clone https://github.com/asleeponpluto/trash-track.git
 ...install node dependencies...
 
 ```bash
-cd trash-track 
+cd trash-track/client
 npm install
 ```
 
