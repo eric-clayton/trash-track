@@ -13,37 +13,52 @@ nvm install 14.17.6
 nvm use 14.17.6
 ```
 
-## How to work on the client-side code
+If you're using [Visual Studio Code](https://code.visualstudio.com/), install the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
-Clone the repository...
+## How to work on the code
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/asleeponpluto/trash-track.git
 ```
 
-...install node dependencies...
+Install node dependencies:
 
 ```bash
 cd trash-track/client
 npm install
+cd ../server
+npm install
 ```
 
-...then start the application by using [Rollup](https://rollupjs.org) (already installed):
+## Starting the application
+
+When working on the app, it is best to run the client and the server simultaneously so that you don't need to rebuild the svelte app everytime you make changes.
+\
+\
+Start the client (you should be in the client folder):
 
 ```bash
 npm run dev
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Start the server (you should be in the server folder):
 
-If you're using [Visual Studio Code](https://code.visualstudio.com/), install the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+```bash
+npm run dev
+```
 
-## Building and running in production mode
+## Building the client for production
 
-To create an optimised version of the app:
+Build an optimised version of the app (you should be in the client folder):
 
 ```bash
 npm run build
 ```
 
 You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+
+## Deploying a release
+
+The server is set up so that going to http://localhost:8080/gui will automatically run the last built version of the client. When ready to release, simply run the server after building the client and everything else will be taken care of.
