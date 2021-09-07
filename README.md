@@ -8,6 +8,11 @@
 
 *You will need to have Node.js installed (This project uses v14.17.6). Install it using nvm: [unix](https://github.com/nvm-sh/nvm) / [windows](https://github.com/coreybutler/nvm-windows).*
 
+```bash
+nvm install 14.17.6
+nvm use 14.17.6
+```
+
 
 ## How to work on the code
 
