@@ -2,7 +2,7 @@
 
 Member 1: Joseph Somerdin
 \
-Member 2:
+Member 2: Eric Clayton
 \
 Member 3: Ashish Satyavarapu
 \
