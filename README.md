@@ -31,13 +31,13 @@ If you're using [Visual Studio Code](https://code.visualstudio.com/), install th
 Clone the repository:
 
 ```bash
-git clone https://github.com/asleeponpluto/trash-track.git
+git clone https://github.com/asleeponpluto/11282group44.git
 ```
 
 Install node dependencies:
 
 ```bash
-cd trash-track/client
+cd 11282group44/client
 npm install
 cd ../server
 npm install
