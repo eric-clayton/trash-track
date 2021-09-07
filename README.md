@@ -13,7 +13,6 @@ nvm install 14.17.6
 nvm use 14.17.6
 ```
 
-
 ## How to work on the code
 
 Clone the repository...
