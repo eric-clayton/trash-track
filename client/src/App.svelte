@@ -9,7 +9,7 @@
   </div>
 
   <div class="map-wrapper">
-    <Map width="400px" height="400px" />
+    <Map width="600px" height="400px" />
   </div>
 
   <CoordinateInputForm />
