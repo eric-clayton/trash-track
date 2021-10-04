@@ -27,10 +27,18 @@
     markers.addTo(map);
   });
 
+  const trashIcon = L.icon({
+    iconUrl: '/trash.png',
+
+    iconSize: [32, 32],
+    iconAnchor: [17, 0], // the anchor point of the icon
+    popupAnchor: [0, 34],
+  });
+
   $: (() => {
     markers.clearLayers();
     coordStore.forEach((coord) => {
-      markers.addLayer(L.marker([coord.lat, coord.lng]));
+      markers.addLayer(L.marker([coord.lat, coord.lng], { icon: trashIcon }));
     });
   })();
 </script>
