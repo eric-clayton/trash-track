@@ -1,10 +1,10 @@
 # 11282group44
 
-Member 1:
+Member 1: Joseph Somerdin
 \
 Member 2:
 \
-Member 3:
+Member 3: Ashish Satyavarapu
 \
 Member 4: Giovanni Cornejo
 
