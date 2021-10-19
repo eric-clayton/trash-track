@@ -1,30 +1,30 @@
 <script>
-	export let name;
+  import Map from './components/Map.svelte';
+  import CoordinateInputForm from './components/CoordinateInputForm.svelte';
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+  <div class="navbar">
+    <h1>Trash-Track!</h1>
+  </div>
+
+  <div class="map-wrapper">
+    <Map width="600px" height="400px" />
+  </div>
+
+  <CoordinateInputForm />
 </main>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
+  .map-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
