@@ -10,9 +10,9 @@
     {/each}
   {/if}
 
-  <div on:click|preventDefault={() => (open = !open)} class="navbar-link">
+  <button on:click|preventDefault={() => (open = !open)} class="navbar-link">
     <img src="/assets/feather/menu.svg" alt="expand" />
-  </div>
+  </button>
 </div>
 
 <style>
@@ -38,6 +38,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  button.navbar-link {
+    border: none;
+    border-radius: 0;
   }
 
   .navbar-link:hover {
