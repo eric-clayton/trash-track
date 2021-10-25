@@ -8,20 +8,17 @@ Member 3: Ashish Satyavarapu
 \
 Member 4: Giovanni Cornejo
 
-
-*Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
-
 ---
 
 # trash-track
 
 ## A web-application to track trash bins and recycling bins.
 
-*You will need to have Node.js installed (This project uses v14.17.6). Install it using nvm: [unix](https://github.com/nvm-sh/nvm) / [windows](https://github.com/coreybutler/nvm-windows).*
+*You will need to have Node.js installed (This project uses v14.18.1). Install it using nvm: [unix](https://github.com/nvm-sh/nvm) / [windows](https://github.com/coreybutler/nvm-windows).*
 
 ```bash
-nvm install 14.17.6
-nvm use 14.17.6
+nvm install 14.18.1
+nvm use 14.18.1
 ```
 
 If you're using [Visual Studio Code](https://code.visualstudio.com/), install the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
@@ -60,6 +57,8 @@ Start the server (you should be in the server folder):
 npm run dev
 ```
 
+Now navigate to `http://localhost:8080` in your browser to see live changes.
+
 ## Building the client for production
 
 Build an optimised version of the app (you should be in the client folder):
@@ -69,7 +68,3 @@ npm run build
 ```
 
 You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
-
-## Deploying a release
-
-The server is set up so that going to http://localhost:8080/gui will automatically run the last built version of the client. When ready to release, simply run the server after building the client and everything else will be taken care of.
