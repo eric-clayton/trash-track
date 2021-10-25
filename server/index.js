@@ -7,6 +7,18 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
 });
 
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
+});
+
+app.get('/find', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
+});
+
+app.get('/add', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
+});
+
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 
 app.listen(PORT, () => {
