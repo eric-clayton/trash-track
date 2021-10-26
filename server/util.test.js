@@ -17,7 +17,7 @@ test('distance between century tower and southwest rec to equal ~0.027470', () =
   expect(roundTo(coordDistance(testPoints[0], testPoints[2]), 6)).toBe(0.027470);
 });
 
-test('distance between southwest rec and marstone science library to equal ~0.026833', () => {
+test('distance between southwest rec and marston science library to equal ~0.026833', () => {
   expect(roundTo(coordDistance(testPoints[2], testPoints[3]), 6)).toBe(0.026833);
 });
 
@@ -25,7 +25,7 @@ test('distance between reitz union and southwest rec to equal ~0.022339', () => 
   expect(roundTo(coordDistance(testPoints[1], testPoints[2]), 6)).toBe(0.022339);
 });
 
-test('distance between century tower and marson science library to equal ~0.000806', () => {
+test('distance between century tower and marston science library to equal ~0.000806', () => {
   expect(roundTo(coordDistance(testPoints[0], testPoints[3]), 6)).toBe(0.000806);
 });
 
