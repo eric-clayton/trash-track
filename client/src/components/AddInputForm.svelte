@@ -1,10 +1,20 @@
 <script>
   import { onDestroy } from 'svelte';
   import { coordArray } from '../stores.js';
+  import { clickedCoords } from '../stores.js';
 
   let lat = '';
   let lng = '';
   let coordStore;
+  let clickedStore;
+
+  const clickedUnsubscribe = clickedCoords.subscribe((value) => {
+    clickedStore = value;
+  });
+
+  const coordUnsubscribe = coordArray.subscribe((value) => {
+    coordStore = value;
+  });
 
   const testPoints = [
     { lat: 29.6488, lng: -82.3433 }, // century tower
@@ -40,11 +50,19 @@
     });
   }
 
-  const unsubscribe = coordArray.subscribe((value) => {
-    coordStore = value;
-  });
+  function updateFormWithClicked() {
+    if (clickedStore) {
+      lat = clickedStore.lat;
+      lng = clickedStore.lng;
+    }
+  }
 
-  onDestroy(unsubscribe);
+  $: clickedStore, updateFormWithClicked();
+
+  onDestroy(() => {
+    coordUnsubscribe();
+    clickedUnsubscribe();
+  });
 </script>
 
 <form on:submit|preventDefault={onSubmit}>
@@ -64,7 +82,7 @@
   form {
     display: flex;
     flex-direction: column;
-    width: 30vw;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;

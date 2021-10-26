@@ -3,9 +3,13 @@ const path = require('path');
 const app = express();
 const PORT = 8080;
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
-});
+const apiRouter = require('./routes/api');
+const svelteRouter = require('./routes/svelte');
+
+app.use(express.json());
+
+app.use(svelteRouter);
+app.use(apiRouter);
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 
