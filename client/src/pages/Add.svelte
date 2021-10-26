@@ -1,6 +1,6 @@
 <script>
   import Map from '../components/Map.svelte';
-  import CoordinateInputForm from '../components/CoordinateInputForm.svelte';
+  import AddInputForm from '../components/AddInputForm.svelte';
 </script>
 
 <main>
@@ -8,7 +8,7 @@
     <Map width="100%" height="400px" />
   </div>
 
-  <CoordinateInputForm />
+  <AddInputForm />
 </main>
 
 <style>

@@ -3,6 +3,7 @@
   import { onDestroy } from 'svelte';
   import * as L from 'leaflet';
   import { coordArray } from '../stores.js';
+  import { clickedCoords } from '../stores.js';
 
   export let width;
   export let height;
@@ -10,11 +11,14 @@
   let map;
   let markers = L.layerGroup();
 
-  const unsubscribe = coordArray.subscribe((value) => {
+  const coordUnsubscribe = coordArray.subscribe((value) => {
     coordStore = value;
   });
 
-  onDestroy(unsubscribe);
+  onDestroy(() => {
+    clickedUnsubscribe();
+    coordUnsubscribe();
+  });
 
   onMount(() => {
     map = L.map('map').setView([29.6436, -82.3549], 13);
@@ -23,6 +27,12 @@
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
+
+    map.on('click', (e) => {
+      clickedCoords.update((value) => {
+        return {lat: e.latlng.lat.toPrecision(8), lng: e.latlng.lng.toPrecision(8)};
+      });
+    });
 
     markers.addTo(map);
   });

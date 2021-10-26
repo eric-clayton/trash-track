@@ -3,21 +3,13 @@ const path = require('path');
 const app = express();
 const PORT = 8080;
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
-});
+const apiRouter = require('./routes/api');
+const svelteRouter = require('./routes/svelte');
 
-app.get('/home', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
-});
+app.use(express.json());
 
-app.get('/find', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
-});
-
-app.get('/add', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'public', 'index.html'));
-});
+app.use(svelteRouter);
+app.use(apiRouter);
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 

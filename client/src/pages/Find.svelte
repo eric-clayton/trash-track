@@ -1,16 +1,16 @@
 <script>
   import Map from '../components/Map.svelte';
-  import CoordinateInputForm from '../components/CoordinateInputForm.svelte';
+  import FindInputForm from '../components/FindInputForm.svelte';
 </script>
 
 <div class="find">
   <h1>Find nearby bins.</h1>
   <h3>Enter your coordinates.</h3>
 
-  <CoordinateInputForm />
+  <FindInputForm />
 
   <div class="map-wrapper">
-    <Map width="100%" height="400px" />
+    <Map width="90%" height="400px" />
   </div>
 
 </div>
