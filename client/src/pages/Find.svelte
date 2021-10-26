@@ -3,22 +3,24 @@
   import CoordinateInputForm from '../components/CoordinateInputForm.svelte';
 </script>
 
-<main>
+<div class="find">
+  <h1>Find nearby bins.</h1>
+  <h3>Enter your coordinates.</h3>
+
+  <CoordinateInputForm />
+
   <div class="map-wrapper">
     <Map width="100%" height="400px" />
   </div>
 
-  <CoordinateInputForm />
-</main>
+</div>
 
 <style>
-  .map-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .find {
+    text-align: center;
   }
 
-  .navbar {
+  .map-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;

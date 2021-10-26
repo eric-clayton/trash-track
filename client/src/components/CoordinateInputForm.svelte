@@ -51,7 +51,9 @@
   <input type="text" bind:value={lat} name="lat" placeholder="latitude" autocomplete="off" />
   <input type="text" bind:value={lng} name="lng" placeholder="longitude" autocomplete="off" />
   <button type="submit">submit</button>
+  <!--
   <button type="button" on:click={loadTestPoints}>load test points</button>
+  -->
 </form>
 
 <div class="storedPoints">
@@ -64,7 +66,7 @@
   form {
     display: flex;
     flex-direction: column;
-    width: 30vw;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;

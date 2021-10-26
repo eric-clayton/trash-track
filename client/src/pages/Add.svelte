@@ -17,10 +17,4 @@
     justify-content: center;
     align-items: center;
   }
-
-  .navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 </style>

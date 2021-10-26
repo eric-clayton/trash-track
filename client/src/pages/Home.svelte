@@ -3,29 +3,55 @@
 
 <div class="welcome">
   <h1>Welcome to Trash Track!</h1>
-  <h3>Making trash fun since 2021.</h3>
-  <img
-    src="https://i.chzbgr.com/full/9421047552/hBA20F941/funny-meme-that-reads-this-could-be-us-above-a-a-photo-of-two-trash-cans-chained-together"
-    alt="hmm"
-    class="meme"
-  />
+  <h3>Saving the world one 🗑️ at a time.</h3>
+
+  <hr class="sep">
+
+  <h2>What can you do with Trash Track?</h2>
+
+  <ul class="features">
+    <li>View nearby trash/recycling bin locations 🗺️</li>
+    <li>Level up your profile when adding new bins 🐠</li>
+    <li>Share your <i>impressive</i> profile with friends 👫</li>
+    <li>Keep track of your favorite bin locations 📝</li>
+  </ul>
+
+  <button class="signup">Sign me up!</button>
 </div>
 
 <style>
-  * {
-    padding: 0;
-    margin: 0;
-  }
-
   .welcome {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
-  .meme {
-    width: 75%;
+  .sep {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
   }
 
-  h1 {
-    outline: none;
+  .features {
+    font-size: 13pt;
+    margin-top: 0.5rem;
   }
+  
+  .signup {
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+  .signup:hover {
+    background-color: darkseagreen;
+  }
+
+  ul {
+    list-style-position: inside;
+  }
+
 </style>
