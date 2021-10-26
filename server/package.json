@@ -5,16 +5,18 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx nodemon",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "jest": "^27.3.1",
     "passport": "^0.5.0",
     "passport-google-oauth20": "^2.0.0",
-    "reliable-round": "^1.0.10"
+    "round-to": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
