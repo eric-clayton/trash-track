@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const chalk = require('chalk');
 const app = express();
 const PORT = 8080;
 
@@ -14,5 +15,6 @@ app.use(apiRouter);
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 
 app.listen(PORT, () => {
-  console.log(`The server has started at http://localhost:${PORT}`);
+  console.log(chalk.magenta('Booting up the Trash-Track machine... Beep Boop'))
+  console.log(chalk.green('The server has started at ') + chalk.blue(`http://localhost:${PORT}`));
 });
