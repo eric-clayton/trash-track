@@ -3,7 +3,7 @@ const path = require('path');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.redirect('/home')
+  res.redirect('/home');
 });
 
 router.get('/home', (req, res) => {
@@ -15,6 +15,10 @@ router.get('/find', (req, res) => {
 });
 
 router.get('/add', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
+});
+
+router.get('/test', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
 });
 

@@ -2,30 +2,47 @@ const express = require('express');
 const router = express.Router();
 
 const { coordClosest } = require('../util');
+const { canAddCoord } = require('../util');
+const { isCoord } = require('../db/schemaChecker');
+const mongo = require('../db/db');
 
-const testPoints = [
-  { lat: 29.6488, lng: -82.3433 }, // century tower
-  { lat: 29.6465, lng: -82.3479 }, // reitz union
-  { lat: 29.6381, lng: -82.3686 }, // southwest rec
-  { lat: 29.6481, lng: -82.3437 }, // marston science library
-];
-
-router.get('/api', (req, res) => {
+router.get('/api', (_req, res) => {
   res.send('welcome to the api!');
 });
 
 // ex. /api/nearby?lat=21&lng=23
-router.get('/api/nearby', (req, res) => {
+router.get('/api/nearby', async (req, res) => {
   const lat = req.query.lat;
   const lng = req.query.lng;
 
-
   if (!lat || !lng) {
-    res.status(400).json({error: "Invalid query parameters..."});
+    res.status(400).json({ error: 'Invalid query parameters...' });
     return;
   }
 
-  res.json(coordClosest(testPoints, {lat: lat, lng: lng}));
+  res.json(await coordClosest({ lat: lat, lng: lng }));
+});
+
+// /api/add
+router.post('/api/add', async (req, res) => {
+  if (!isCoord(req.body)) {
+    res.status(400).json({ error: 'Invalid json request...' });
+    return;
+  }
+
+  const lat = req.body.lat;
+  const lng = req.body.lng;
+
+  const minDistance = 20; // distance in meters
+
+  if (await canAddCoord({lat, lng}, minDistance)) {
+    db = mongo.get();
+    db.collection('coordinates').insertOne({lat, lng});
+    res.status(201).json({ message: 'Success adding coordinates!' });
+  } else {
+    res.status(200).json({ message: 'Nearby bin already exists, try a different location!' });
+  }
+
 });
 
 module.exports = router;

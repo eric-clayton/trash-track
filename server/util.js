@@ -1,24 +1,55 @@
+const mongo = require('./db/db');
+const degToMeterFactor = 111139;
+
 const coordDistance = (coordObj1, coordObj2) => {
   return Math.sqrt(
     Math.pow(coordObj2.lat - coordObj1.lat, 2) + Math.pow(coordObj2.lng - coordObj1.lng, 2)
   );
 };
 
-const coordClosest = (coordArray, coordObj) => {
+const coordClosest = async (coordObj) => {
   let closeCoord = null;
   let closeDist = Infinity;
 
-  coordArray.forEach(coord => {
-    const tempDist = coordDistance(coord, coordObj);
+  const db = mongo.get();
 
-    if (tempDist < closeDist) {
-      closeCoord = coord;
-      closeDist = tempDist;
-    }
-  });
+  await db
+    .collection('coordinates')
+    .find()
+    .forEach((coord) => {
+      const tempDist = coordDistance(coord, coordObj);
 
-  return {coordinates: closeCoord, distance: closeDist};
-}
+      if (tempDist < closeDist) {
+        closeCoord = { lat: coord.lat, lng: coord.lng };
+        closeDist = tempDist;
+      }
+    });
+
+  if (closeCoord == null) {
+    return { coordinates: { lat: 0, lng: 0 }, distance: 0 };
+  }
+
+  return { coordinates: closeCoord, distance: closeDist };
+};
+
+const canAddCoord = async (coordObj, distance) => {
+  const db = mongo.get();
+  let canAdd = true;
+
+  await db
+    .collection('coordinates')
+    .find()
+    .forEach((coord) => {
+      const tempDist = coordDistance(coord, coordObj);
+
+      if (tempDist * degToMeterFactor <= distance) {
+        canAdd = false;
+      }
+    });
+
+  return canAdd;
+};
 
 exports.coordDistance = coordDistance;
 exports.coordClosest = coordClosest;
+exports.canAddCoord = canAddCoord;

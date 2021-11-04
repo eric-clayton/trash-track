@@ -7,6 +7,7 @@
   import Home from './pages/Home.svelte';
   import Find from './pages/Find.svelte';
   import Add from './pages/Add.svelte';
+  import Test from './pages/Test.svelte';
 
   let linkArray = [
     { name: 'Home', address: '/home' },
@@ -35,6 +36,13 @@
 
       <Route path="/add">
         <Add />
+      </Route>
+
+      <!-- 
+        TODO: remove this
+      -->
+      <Route path="/test">
+        <Test />
       </Route>
 
     </div>

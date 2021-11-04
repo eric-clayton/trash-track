@@ -15,6 +15,7 @@
     "chalk": "^4.1.2",
     "express": "^4.17.1",
     "jest": "^27.3.1",
+    "mongodb": "^4.1.4",
     "passport": "^0.5.0",
     "passport-google-oauth20": "^2.0.0",
     "round-to": "^5.0.0"
