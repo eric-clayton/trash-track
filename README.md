@@ -21,6 +21,8 @@ nvm install 14.18.1
 nvm use 14.18.1
 ```
 
+*You will also need MongoDB installed to host the local database. Install it [here](https://github.com/coreybutler/nvm-windows).*
+
 If you're using [Visual Studio Code](https://code.visualstudio.com/), install the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
 ## How to work on the code
@@ -45,6 +47,13 @@ npm install
 When working on the app, it is best to run the client and the server simultaneously so that you don't need to rebuild the svelte app everytime you make changes.
 \
 \
+
+Start a local mongo instance:
+```bash
+# dbpath can be wherever, this is just an example
+mongod --dbpath ~/Projects/11282group44/local-mongo
+```
+
 Start the client (you should be in the client folder):
 
 ```bash
