@@ -21,7 +21,7 @@ nvm install 14.18.1
 nvm use 14.18.1
 ```
 
-*You will also need MongoDB installed to host the local database. Install it [here](https://github.com/coreybutler/nvm-windows).*
+*You will also need MongoDB installed to host the local database: install it [here](https://www.mongodb.com/try/download/community).*
 
 If you're using [Visual Studio Code](https://code.visualstudio.com/), install the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
