@@ -2,5 +2,6 @@
 /client/public/build/
 /server/node_modules/
 /local-mongo/*
+!/local-mongo/.gitkeep
 
 .DS_Store
