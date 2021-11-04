@@ -47,7 +47,6 @@ npm install
 When working on the app, it is best to run the client and the server simultaneously so that you don't need to rebuild the svelte app everytime you make changes.
 \
 \
-
 Start a local mongo instance:
 ```bash
 # dbpath can be wherever, this is just an example
