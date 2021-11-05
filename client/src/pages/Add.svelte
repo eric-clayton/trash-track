@@ -28,9 +28,11 @@
       coordArray.update((value) => {
         return [...value, {lat, lng}];
       });
-    }
 
-    added = { lat, lng };
+      added = { lat, lng };
+    } else {
+      added = null;
+    }
   }
 
   function mapClick (event) {

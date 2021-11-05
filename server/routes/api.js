@@ -1,10 +1,10 @@
 const express = require('express');
-const router = express.Router();
-
 const { coordClosest } = require('../util');
 const { canAddCoord } = require('../util');
 const { isCoord } = require('../db/schemaChecker');
 const mongo = require('../db/db');
+
+const router = express.Router();
 
 router.get('/api', (_req, res) => {
   res.send('welcome to the api!');
@@ -20,7 +20,7 @@ router.get('/api/nearby', async (req, res) => {
     return;
   }
 
-  res.json(await coordClosest({ lat: lat, lng: lng }));
+  res.json(await coordClosest({ lat, lng }));
 });
 
 // /api/add
@@ -35,14 +35,13 @@ router.post('/api/add', async (req, res) => {
 
   const minDistance = 20; // distance in meters
 
-  if (await canAddCoord({lat, lng}, minDistance)) {
-    db = mongo.get();
-    db.collection('coordinates').insertOne({lat, lng});
+  if (await canAddCoord({ lat, lng }, minDistance)) {
+    const db = mongo.get();
+    db.collection('coordinates').insertOne({ lat, lng });
     res.status(201).json({ message: 'Success adding coordinates!' });
   } else {
     res.status(200).json({ message: 'Nearby bin already exists, try a different location!' });
   }
-
 });
 
 module.exports = router;

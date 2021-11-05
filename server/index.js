@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const chalk = require('chalk');
+const { exec } = require('child_process');
 
 const PORT = 8080;
 const app = express();
@@ -11,7 +12,7 @@ const mongo = require('./db/db');
 
 const testPoints = [
   { lat: 29.64883, lng: -82.34329 }, // century tower
-  { lat: 29.64099, lng: -82.34200 }, // reitz union
+  { lat: 29.64099, lng: -82.342 }, // reitz union
   { lat: 29.63842, lng: -82.36832 }, // southwest rec
   { lat: 29.64799, lng: -82.34395 }, // marston science library
 ];
@@ -24,7 +25,7 @@ async function main() {
 
   const db = mongo.get();
   await db.collection('coordinates').deleteMany({});
-  console.log(chalk.red('Cleared test database.'));
+  console.log(chalk.red('Cleared database.'));
   await db.collection('coordinates').insertMany(testPoints);
   console.log(chalk.red('Inserted test points into database.\n'));
 
@@ -47,4 +48,12 @@ try {
   main();
 } catch (err) {
   console.error(err);
+  mongo.get().shutdownServer();
+  process.exit(-1);
 }
+
+process.on('SIGINT', () => {
+  console.log('\nProcess interrupted, shutting down mongo server...');
+  exec("mongo admin --eval 'db.shutdownServer()'");
+  process.exit(0);
+});

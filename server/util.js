@@ -1,10 +1,9 @@
 const mongo = require('./db/db');
+
 const degToMeterFactor = 111139;
 
 const coordDistance = (coordObj1, coordObj2) => {
-  return Math.sqrt(
-    Math.pow(coordObj2.lat - coordObj1.lat, 2) + Math.pow(coordObj2.lng - coordObj1.lng, 2)
-  );
+  return Math.sqrt((coordObj2.lat - coordObj1.lat) ** 2 + (coordObj2.lng - coordObj1.lng) ** 2);
 };
 
 const coordClosest = async (coordObj) => {

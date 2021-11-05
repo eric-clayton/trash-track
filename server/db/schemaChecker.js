@@ -1,11 +1,11 @@
 const { Coord } = require('./schema/Coord');
 
 function isSchema(obj, refObj) {
-  if (typeof obj != typeof Object() || typeof refObj != typeof Object()) {
+  if (typeof obj !== typeof Object() || typeof refObj !== typeof Object()) {
     return false;
   }
 
-  if (Object.keys(obj).length != Object.keys(refObj).length) {
+  if (Object.keys(obj).length !== Object.keys(refObj).length) {
     return false;
   }
 

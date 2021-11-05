@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon",
+    "dev": "run-script-os",
+    "predev:nix": "mongod --dbpath ../local-mongo &> /dev/null &",
+    "dev:nix": "npx nodemon",
+    "predev:windows": "start mongod --dbpath ../local-mongo",
+    "dev:windows": "npx nodemon",
     "start": "node index.js",
     "test": "jest"
   },
@@ -21,6 +25,10 @@
     "round-to": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2",
+    "nodemon": "^2.0.12",
+    "run-script-os": "^1.1.6"
   }
 }
