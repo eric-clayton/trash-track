@@ -2,22 +2,12 @@
 </script>
 
 <div class="welcome">
-  <h1>Welcome to Trash Track!</h1>
-  <h3>Saving the world one 🗑️ at a time.</h3>
+  <h1>You are not logged in :(</h1>
 
   <hr class="sep">
 
-  <h2>What can you do with Trash Track?</h2>
-
-  <ul class="features">
-    <li>View nearby trash/recycling bin locations 🗺️</li>
-    <li>Level up your profile when adding new bins 🐠</li>
-    <li>Share your <i>impressive</i> profile with friends 👫</li>
-    <li>Keep track of your favorite bin locations 📝</li>
-  </ul>
-
   <a href="/auth/google">
-    <button class="signup">Sign me up!</button>
+    <button class="signup">Log in!</button>
   </a>
 </div>
 
@@ -57,3 +47,4 @@
   }
 
 </style>
+

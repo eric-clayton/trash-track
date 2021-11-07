@@ -1,4 +1,7 @@
+require('dotenv').config();
 const express = require('express');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
 const path = require('path');
 const chalk = require('chalk');
 const { exec } = require('child_process');
@@ -6,9 +9,11 @@ const { exec } = require('child_process');
 const PORT = 8080;
 const app = express();
 
+const authRouter = require('./routes/auth');
 const apiRouter = require('./routes/api');
 const svelteRouter = require('./routes/svelte');
 const mongo = require('./db/db');
+const pass = require('./passport');
 
 const testPoints = [
   { lat: 29.64883, lng: -82.34329 }, // century tower
@@ -29,10 +34,21 @@ async function main() {
   await db.collection('coordinates').insertMany(testPoints);
   console.log(chalk.red('Inserted test points into database.\n'));
 
+  /* Initialize Passport */
+  pass.init();
+
   /* Express */
 
   app.use(express.json());
+  app.use(cookieSession({
+    name: 'google-auth',
+    keys: ['brayden', 'danny']
+  }));
 
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  app.use(authRouter);
   app.use(svelteRouter);
   app.use(apiRouter);
 

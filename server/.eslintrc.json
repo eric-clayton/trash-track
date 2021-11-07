@@ -14,6 +14,7 @@
     }],
     "arrow-body-style": ["error", "always"],
     "no-prototype-builtins": "off",
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "comma-dangle": "off"
   }
 }

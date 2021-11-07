@@ -1,4 +1,5 @@
 const { Coord } = require('./schema/Coord');
+const { User } = require('./schema/User');
 
 function isSchema(obj, refObj) {
   if (typeof obj !== typeof Object() || typeof refObj !== typeof Object()) {
@@ -32,4 +33,10 @@ function isCoord(coord) {
   return isSchema(coord, coordTemplate);
 }
 
+function isUser(user) {
+  const userTemplate = new User();
+  return isSchema(user, userTemplate);
+}
+
 exports.isCoord = isCoord;
+exports.isUser = isUser;

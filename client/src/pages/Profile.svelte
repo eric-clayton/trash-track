@@ -2,22 +2,22 @@
 </script>
 
 <div class="welcome">
-  <h1>Welcome to Trash Track!</h1>
-  <h3>Saving the world one 🗑️ at a time.</h3>
+  <h1>Welcome to your profile!</h1>
+  <h3>something here</h3>
 
   <hr class="sep">
 
-  <h2>What can you do with Trash Track?</h2>
+  <h2>your stats</h2>
 
   <ul class="features">
-    <li>View nearby trash/recycling bin locations 🗺️</li>
-    <li>Level up your profile when adding new bins 🐠</li>
-    <li>Share your <i>impressive</i> profile with friends 👫</li>
-    <li>Keep track of your favorite bin locations 📝</li>
+    <li>440 bench</li>
+    <li>7 foot 5 inches</li>
+    <li>lebrons best friend</li>
+    <li>swag af</li>
   </ul>
 
-  <a href="/auth/google">
-    <button class="signup">Sign me up!</button>
+  <a href="/logout">
+    <button class="signup">Logout :(</button>
   </a>
 </div>
 

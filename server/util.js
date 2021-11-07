@@ -1,4 +1,5 @@
 const mongo = require('./db/db');
+const { User } = require('./db/schema/User');
 
 const degToMeterFactor = 111139;
 
@@ -49,6 +50,42 @@ const canAddCoord = async (coordObj, distance) => {
   return canAdd;
 };
 
+const ensureAuthenticated = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+};
+
+const createUser = async (googleID) => {
+  try {
+    const db = mongo.get();
+    console.log(await db.collection('users').insertOne(new User(googleID)));
+  } catch (e) {
+    throw new Error('Something went wrong in util.js [createUser()]');
+  }
+};
+
+const findUser = async (googleID) => {
+  const db = mongo.get();
+  const user = await db.collection('users').findOne({ googleID });
+
+  return user;
+};
+
+const userExists = async (googleID) => {
+  if (!(await findUser(googleID))) {
+    return false;
+  }
+
+  return true;
+};
+
 exports.coordDistance = coordDistance;
 exports.coordClosest = coordClosest;
 exports.canAddCoord = canAddCoord;
+exports.createUser = createUser;
+exports.findUser = findUser;
+exports.userExists = userExists;
+exports.ensureAuthenticated = ensureAuthenticated;
