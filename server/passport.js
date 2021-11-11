@@ -17,7 +17,7 @@ function init() {
           let user = await findUser(profile.id);
 
           if (!user) {
-            console.log(await createUser(profile.id));
+            await createUser(profile.id);
             user = await findUser(profile.id);
           }
 

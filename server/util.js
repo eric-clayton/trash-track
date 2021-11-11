@@ -95,7 +95,8 @@ const ensureAuthenticatedNoUsernameJson = (req, res, next) => {
 const createUser = async (googleID) => {
   try {
     const db = mongo.get();
-    console.log(await db.collection('users').insertOne(new User(googleID)));
+    await db.collection('users').insertOne(new User(googleID));
+    console.log(`User with googleID: ${googleID} created.`);
   } catch (e) {
     throw new Error('Something went wrong in util.js [createUser()]');
   }
