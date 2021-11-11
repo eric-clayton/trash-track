@@ -7,8 +7,8 @@ const coordDistance = (coordObj1, coordObj2) => {
   return Math.sqrt((coordObj2.lat - coordObj1.lat) ** 2 + (coordObj2.lng - coordObj1.lng) ** 2);
 };
 
-const coordClosest = async (coordObj) => {
-  let closeCoord = null;
+const coordClosest = async (coordObj, isRecycle) => {
+  let closeBin = null;
   let closeDist = Infinity;
 
   const db = mongo.get();
@@ -16,20 +16,22 @@ const coordClosest = async (coordObj) => {
   await db
     .collection('bins')
     .find()
-    .forEach((coord) => {
-      const tempDist = coordDistance(coord, coordObj);
+    .forEach((bin) => {
+      if (bin.isRecycle === isRecycle) {
+        const tempDist = coordDistance(bin, coordObj);
 
-      if (tempDist < closeDist) {
-        closeCoord = { lat: coord.lat, lng: coord.lng };
-        closeDist = tempDist;
+        if (tempDist < closeDist) {
+          closeBin = bin;
+          closeDist = tempDist;
+        }
       }
     });
 
-  if (closeCoord == null) {
-    return { coordinates: { lat: 0, lng: 0 }, distance: 0 };
+  if (closeBin == null) {
+    return null;
   }
 
-  return { coordinates: closeCoord, distance: closeDist };
+  return { bin: closeBin, distance: closeDist };
 };
 
 const canAddCoord = async (coordObj, distance) => {

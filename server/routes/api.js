@@ -12,17 +12,25 @@ router.get('/api', (_req, res) => {
   res.send('welcome to the api!');
 });
 
-// ex. /api/nearby?lat=21&lng=23
-router.get('/api/nearby', async (req, res) => {
+// ex. /api/nearby/trash?lat=21&lng=23 (trash or recycle)
+router.get('/api/nearby/:bintype', async (req, res) => {
   const lat = req.query.lat;
   const lng = req.query.lng;
+  const bintype = req.params.bintype;
+
+  if (!bintype || (bintype !== 'trash' && bintype !== 'recycle')) {
+    res.status(400).json({ error: 'Invalid url parameters, use "trash" or "recycle"' });
+    return;
+  }
 
   if (!lat || !lng) {
     res.status(400).json({ error: 'Invalid query parameters...' });
     return;
   }
 
-  res.json(await coordClosest({ lat, lng }));
+  const isRecycle = bintype === 'trash' ? 0 : 1;
+
+  res.json(await coordClosest({ lat, lng }, isRecycle));
 });
 
 // /api/add/trash or /api/add/recycle
@@ -35,7 +43,7 @@ router.post('/api/add/:bintype', ensureAuthenticatedJson, async (req, res) => {
   const lat = req.body.lat;
   const lng = req.body.lng;
   const bintype = req.params.bintype;
-  const minMinutes = 30; // minutes
+  const minMinutes = 10; // minutes
 
   if (!bintype || (bintype !== 'trash' && bintype !== 'recycle')) {
     res.status(400).json({ error: 'Invalid url parameters, use "trash" or "recycle"' });
@@ -51,7 +59,7 @@ router.post('/api/add/:bintype', ensureAuthenticatedJson, async (req, res) => {
     const timeLastAdded = user.timeLastAdded;
 
     if ((curDate - timeLastAdded) < minTime) {
-      res.status(429).json({ error: 'Must wait 30 minutes between "add" requests.' });
+      res.status(429).json({ error: `Must wait ${minMinutes} minutes between "add" requests.` });
       return;
     }
 
