@@ -7,12 +7,11 @@
   export let buttonText = 'submit';
 
   function onSubmit() {
-    dispatch('formSubmit', {lat, lng});
+    dispatch('formSubmit', { lat, lng });
 
     lat = '';
     lng = '';
   }
-
 </script>
 
 <form on:submit|preventDefault={onSubmit}>

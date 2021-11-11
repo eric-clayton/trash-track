@@ -3,21 +3,21 @@
   import InputForm from '../components/InputForm.svelte';
   import { coordArray } from '../stores.js';
 
-  let clickedCoords = {lat: null, lng: null};
+  let clickedCoords = { lat: null, lng: null };
   let added = null;
 
-  async function formSubmit (event) {
+  async function formSubmit(event) {
     let lat = event.detail.lat;
     let lng = event.detail.lng;
 
-    console.log(JSON.stringify({lat: Number(lat), lng: Number(lng)}))
+    console.log(JSON.stringify({ lat: Number(lat), lng: Number(lng) }));
 
     let response = await fetch(`http://localhost:8080/api/add`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({lat: Number(lat), lng: Number(lng)})
+      body: JSON.stringify({ lat: Number(lat), lng: Number(lng) }),
     });
     let responseObj = await response.json();
     let responseMessage = responseObj.message;
@@ -26,14 +26,14 @@
 
     if (response.status == 201) {
       coordArray.update((value) => {
-        return [...value, {lat, lng}];
+        return [...value, { lat, lng }];
       });
     }
 
     added = { lat, lng };
   }
 
-  function mapClick (event) {
+  function mapClick(event) {
     clickedCoords.lat = event.detail.lat;
     clickedCoords.lng = event.detail.lng;
   }
@@ -55,7 +55,6 @@
   <div class="map-wrapper">
     <Map width="90%" height="400px" on:mapClick={mapClick} />
   </div>
-
 </div>
 
 <style>

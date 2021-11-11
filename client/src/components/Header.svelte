@@ -1,10 +1,9 @@
 <script>
-
 </script>
 
 <div class="site-header">
   <h1>Trash</h1>
-  <img src="/assets/logo.png" alt="logo" class="site-logo">
+  <img src="/assets/logo.png" alt="logo" class="site-logo" />
   <h1>Track</h1>
 </div>
 

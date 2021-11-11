@@ -41,7 +41,7 @@
     console.log(`Distance: ${responseObj.distance}`);
 
     coordArray.update((value) => {
-      return [{lat: responseCoord.lat, lng: responseCoord.lng}];
+      return [{ lat: responseCoord.lat, lng: responseCoord.lng }];
     });
 
     lat = '';
@@ -111,5 +111,4 @@
     margin-top: 0.5rem;
     margin-bottom: 1rem;
   }
-
 </style>

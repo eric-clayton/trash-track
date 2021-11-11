@@ -4,7 +4,7 @@
 <div class="welcome">
   <h1>You are not logged in :(</h1>
 
-  <hr class="sep">
+  <hr class="sep" />
 
   <a href="/auth/google">
     <button class="signup">Log in!</button>
@@ -25,11 +25,6 @@
     width: 100%;
   }
 
-  .features {
-    font-size: 13pt;
-    margin-top: 0.5rem;
-  }
-  
   .signup {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -41,10 +36,4 @@
   .signup:hover {
     background-color: darkseagreen;
   }
-
-  ul {
-    list-style-position: inside;
-  }
-
 </style>
-

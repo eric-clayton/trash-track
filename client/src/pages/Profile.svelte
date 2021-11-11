@@ -17,7 +17,7 @@
   <h1>Welcome to your profile!</h1>
   <h3>{username}</h3>
 
-  <hr class="sep">
+  <hr class="sep" />
 
   <h2>Your stats:</h2>
 
@@ -51,7 +51,7 @@
     font-size: 13pt;
     margin-top: 0.5rem;
   }
-  
+
   .signup {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -67,5 +67,4 @@
   ul {
     list-style-position: inside;
   }
-
 </style>

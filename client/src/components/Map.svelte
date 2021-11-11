@@ -29,7 +29,7 @@
     }).addTo(map);
 
     map.on('click', (e) => {
-      dispatch('mapClick', {lat: e.latlng.lat.toPrecision(7), lng: e.latlng.lng.toPrecision(7)});
+      dispatch('mapClick', { lat: e.latlng.lat.toPrecision(7), lng: e.latlng.lng.toPrecision(7) });
     });
 
     markers.addTo(map);

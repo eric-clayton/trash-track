@@ -19,7 +19,7 @@
 
     console.log(JSON.stringify({ lat: Number(lat), lng: Number(lng) }));
 
-    const binParameter = ( isRecycle ) ? 'recycle' : 'trash';
+    const binParameter = isRecycle ? 'recycle' : 'trash';
 
     let response = await fetch(`http://localhost:8080/api/add/${binParameter}`, {
       method: 'POST',
@@ -62,11 +62,18 @@
   <h5>( click on the map to auto-fill form )</h5>
 
   <div class="toggle-wrapper">
-    <img src="/assets/RemixIcon/delete-bin-line.svg" alt="" class="adjust-icon"/>
-    <span class="toggle"><Toggle bind:toggled={isRecycle} hideLabel untoggledColor="teal" toggledColor="teal" /></span>
-    <img src="/assets/RemixIcon/recycle-line.svg" alt="" class="adjust-icon"/>
+    <img src="/assets/RemixIcon/delete-bin-line.svg" alt="" class="adjust-icon" />
+    <span class="toggle"
+      ><Toggle bind:toggled={isRecycle} hideLabel untoggledColor="teal" toggledColor="teal" /></span
+    >
+    <img src="/assets/RemixIcon/recycle-line.svg" alt="" class="adjust-icon" />
   </div>
-  <InputForm lat={clickedCoords.lat} lng={clickedCoords.lng} buttonText='Add Bin!' on:formSubmit={formSubmit} />
+  <InputForm
+    lat={clickedCoords.lat}
+    lng={clickedCoords.lng}
+    buttonText="Add Bin!"
+    on:formSubmit={formSubmit}
+  />
 
   {#if added != null}
     <div class="added">
@@ -118,7 +125,7 @@
   .neutral {
     color: cadetblue;
   }
-  
+
   .toggle-wrapper {
     display: flex;
     justify-content: center;

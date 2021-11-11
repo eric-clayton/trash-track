@@ -28,7 +28,6 @@
 
   <Router>
     <div>
-
       <Route path="/home">
         <Home />
       </Route>
@@ -59,7 +58,6 @@
       <Route path="/test">
         <Test />
       </Route>
-
     </div>
   </Router>
 </main>
