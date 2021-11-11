@@ -14,7 +14,7 @@ const coordClosest = async (coordObj) => {
   const db = mongo.get();
 
   await db
-    .collection('coordinates')
+    .collection('bins')
     .find()
     .forEach((coord) => {
       const tempDist = coordDistance(coord, coordObj);
@@ -37,7 +37,7 @@ const canAddCoord = async (coordObj, distance) => {
   let canAdd = true;
 
   await db
-    .collection('coordinates')
+    .collection('bins')
     .find()
     .forEach((coord) => {
       const tempDist = coordDistance(coord, coordObj);
@@ -52,11 +52,43 @@ const canAddCoord = async (coordObj, distance) => {
 
 const ensureAuthenticated = (req, res, next) => {
   if (req.user) {
-    next();
+    if (!req.user.username || req.user.username === '') {
+      res.redirect('/update');
+    } else {
+      next();
+    }
   } else {
     res.redirect('/login');
   }
 };
+
+const ensureAuthenticatedJson = (req, res, next) => {
+  if (req.user) {
+    if (!req.user.username || req.user.username === '') {
+      res.status(403).json({ error: 'User has not set a username...' });
+    } else {
+      next();
+    }
+  } else {
+    res.status(401).json({ error: 'User not authenticated...' });
+  }
+};
+
+const ensureAuthenticatedNoUsername = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
+
+const ensureAuthenticatedNoUsernameJson = (req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.status(401).json({ error: 'User not authenticated...' });
+  }
+}
 
 const createUser = async (googleID) => {
   try {
@@ -89,3 +121,6 @@ exports.createUser = createUser;
 exports.findUser = findUser;
 exports.userExists = userExists;
 exports.ensureAuthenticated = ensureAuthenticated;
+exports.ensureAuthenticatedJson = ensureAuthenticatedJson;
+exports.ensureAuthenticatedNoUsername = ensureAuthenticatedNoUsername;
+exports.ensureAuthenticatedNoUsernameJson = ensureAuthenticatedNoUsernameJson;

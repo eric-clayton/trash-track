@@ -14,12 +14,13 @@ const apiRouter = require('./routes/api');
 const svelteRouter = require('./routes/svelte');
 const mongo = require('./db/db');
 const pass = require('./passport');
+const { Bin } = require('./db/schema/Bin');
 
 const testPoints = [
-  { lat: 29.64883, lng: -82.34329 }, // century tower
-  { lat: 29.64099, lng: -82.342 }, // reitz union
-  { lat: 29.63842, lng: -82.36832 }, // southwest rec
-  { lat: 29.64799, lng: -82.34395 }, // marston science library
+  new Bin(29.64883, -82.34329, 0, 'joey'),   // century tower
+  new Bin(29.64099, -82.34778, 0, 'ashish'), // reitz union
+  new Bin(29.63842, -82.36832, 0, 'gio'),    // southwest rec
+  new Bin(29.64799, -82.34395, 0, 'eric'),   // marston science library
 ];
 
 async function main() {
@@ -30,9 +31,11 @@ async function main() {
 
   const db = mongo.get();
   await db.collection('coordinates').deleteMany({});
+  await db.collection('bins').deleteMany({});
+  await db.collection('users').deleteMany({});
   console.log(chalk.red('Cleared database.'));
-  await db.collection('coordinates').insertMany(testPoints);
-  console.log(chalk.red('Inserted test points into database.\n'));
+  await db.collection('bins').insertMany(testPoints);
+  console.log(chalk.red('Inserted test bins into database.\n'));
 
   /* Initialize Passport */
   pass.init();

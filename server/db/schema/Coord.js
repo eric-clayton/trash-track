@@ -5,7 +5,7 @@ class Coord {
   }
 
   static testCoord() {
-    return new Coord(0, 0);
+    return new Coord();
   }
 }
 

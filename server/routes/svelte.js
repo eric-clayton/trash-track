@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const { ensureAuthenticated } = require('../util');
+const { ensureAuthenticatedNoUsername } = require('../util');
 
 const router = express.Router();
 
@@ -26,6 +27,10 @@ router.get('/profile', ensureAuthenticated, (req, res) => {
 });
 
 router.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
+});
+
+router.get('/update', ensureAuthenticatedNoUsername, (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
 });
 

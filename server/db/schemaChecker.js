@@ -1,5 +1,6 @@
-const { Coord } = require('./schema/Coord');
+const { Bin } = require('./schema/Bin');
 const { User } = require('./schema/User');
+const { Coord } = require('./schema/Coord');
 
 function isSchema(obj, refObj) {
   if (typeof obj !== typeof Object() || typeof refObj !== typeof Object()) {
@@ -28,9 +29,9 @@ function isSchema(obj, refObj) {
 
 /* Public Methods */
 
-function isCoord(coord) {
-  const coordTemplate = new Coord();
-  return isSchema(coord, coordTemplate);
+function isBin(bin) {
+  const binTemplate = new Bin();
+  return isSchema(bin, binTemplate);
 }
 
 function isUser(user) {
@@ -38,5 +39,11 @@ function isUser(user) {
   return isSchema(user, userTemplate);
 }
 
-exports.isCoord = isCoord;
+function isCoord(coord) {
+  const coordTemplate = new Coord();
+  return isSchema(coord, coordTemplate);
+}
+
+exports.isBin = isBin;
 exports.isUser = isUser;
+exports.isCoord = isCoord;
