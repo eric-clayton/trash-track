@@ -53,12 +53,12 @@ router.post('/api/add/:bintype', ensureAuthenticatedJson, async (req, res) => {
   try {
     const db = mongo.get();
 
-    const minTime = minMinutes*1000*60;
+    const minTime = minMinutes * 1000 * 60;
     const user = await findUser(req.user.googleID);
     const curDate = new Date();
     const timeLastAdded = user.timeLastAdded;
 
-    if ((curDate - timeLastAdded) < minTime) {
+    if (curDate - timeLastAdded < minTime) {
       res.status(429).json({ error: `Must wait ${minMinutes} minutes between "add" requests.` });
       return;
     }
@@ -93,12 +93,14 @@ router.patch('/api/update', ensureAuthenticatedNoUsernameJson, async (req, res) 
         res.status(403).json({ error: 'Username must be provided...' });
         return;
       } else {
-        const matchingUser = await db.collection('users').findOne({username: req.body.username});
+        const matchingUser = await db.collection('users').findOne({ username: req.body.username });
         if (matchingUser) {
           res.status(406).json({ error: 'Username already exists, try another one...' });
           return;
         } else {
-          await db.collection('users').updateOne({ googleID: req.user.googleID }, { $set: { username: req.body.username } });
+          await db
+            .collection('users')
+            .updateOne({ googleID: req.user.googleID }, { $set: { username: req.body.username } });
           res.status(201).json({ message: 'Success updating username!' });
           return;
         }

@@ -17,10 +17,10 @@ const pass = require('./passport');
 const { Bin } = require('./db/schema/Bin');
 
 const testPoints = [
-  new Bin(29.64883, -82.34329, 0, 'joey'),   // century tower
+  new Bin(29.64883, -82.34329, 0, 'joey'), // century tower
   new Bin(29.64099, -82.34778, 0, 'ashish'), // reitz union
-  new Bin(29.63842, -82.36832, 0, 'gio'),    // southwest rec
-  new Bin(29.64799, -82.34395, 0, 'eric'),   // marston science library
+  new Bin(29.63842, -82.36832, 0, 'gio'), // southwest rec
+  new Bin(29.64799, -82.34395, 0, 'eric'), // marston science library
 ];
 
 async function main() {
@@ -43,10 +43,12 @@ async function main() {
   /* Express */
 
   app.use(express.json());
-  app.use(cookieSession({
-    name: 'google-auth',
-    keys: ['brayden', 'danny']
-  }));
+  app.use(
+    cookieSession({
+      name: 'google-auth',
+      keys: ['brayden', 'danny'],
+    })
+  );
 
   app.use(passport.initialize());
   app.use(passport.session());

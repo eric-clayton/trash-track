@@ -82,7 +82,7 @@ const ensureAuthenticatedNoUsername = (req, res, next) => {
   } else {
     res.redirect('/login');
   }
-}
+};
 
 const ensureAuthenticatedNoUsernameJson = (req, res, next) => {
   if (req.user) {
@@ -90,7 +90,7 @@ const ensureAuthenticatedNoUsernameJson = (req, res, next) => {
   } else {
     res.status(401).json({ error: 'User not authenticated...' });
   }
-}
+};
 
 const createUser = async (googleID) => {
   try {
