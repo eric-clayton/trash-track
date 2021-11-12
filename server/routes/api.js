@@ -97,21 +97,50 @@ router.patch('/api/update', ensureAuthenticatedNoUsernameJson, async (req, res) 
     if (!user.username || user.username === '') {
       if (!req.body.username || req.body.username === '') {
         res.status(403).json({ error: 'Username must be provided...' });
-        return;
       } else {
         const matchingUser = await db.collection('users').findOne({ username: req.body.username });
         if (matchingUser) {
           res.status(406).json({ error: 'Username already exists, try another one...' });
-          return;
         } else {
           await db
             .collection('users')
             .updateOne({ googleID: req.user.googleID }, { $set: { username: req.body.username } });
           res.status(201).json({ message: 'Success updating username!' });
-          return;
         }
       }
     }
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: 'Something went wrong on our end, please try again :(' });
+  }
+});
+
+router.patch('/api/config', ensureAuthenticatedJson, async (req, res) => {
+  try {
+    const db = mongo.get();
+    const user = await findUser(req.user.googleID);
+    let bio = null;
+    let pfpURL = null;
+
+    if (req.body.bio && req.body.bio !== '') {
+      if (req.body.bio.length > 80) {
+        res.status(406).json({ error: 'Bio too long... (max 80 chars)' });
+      } else {
+        bio = req.body.bio;
+      }
+    }
+
+    if (req.body.pfpURL && req.body.pfpURL !== '') {
+      pfpURL = req.body.pfpURL;
+    }
+
+    if (bio == null) bio = user.bio;
+    if (pfpURL == null) pfpURL = user.pfpURL;
+
+    await db
+      .collection('users')
+      .updateOne({ googleID: req.user.googleID }, { $set: { bio, pfpURL } });
+    res.status(201).json({ message: 'Success updating user profile!' });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: 'Something went wrong on our end, please try again :(' });
@@ -123,8 +152,10 @@ router.get('/api/userdata', ensureAuthenticatedJson, async (req, res) => {
     const user = await findUser(req.user.googleID);
     res.json({
       username: user.username,
+      bio: user.bio,
       trashCount: user.trashCount,
       recycleCount: user.recycleCount,
+      pfpURL: user.pfpURL,
       xp: user.xp,
     });
   } catch (e) {

@@ -3,7 +3,7 @@ class User {
     googleID = '',
     username = '',
     bio = '',
-    pfpURL = '',
+    pfpURL = '/assets/default-pfp.jpg',
     // year, month, day, hour, minute
     timeLastAdded = new Date(2002, 6, 5, 12, 30),
     trashCount = 0,

@@ -1,7 +1,27 @@
 <script>
   let bio = '';
+  let pfpURL = '';
 
   async function onSubmit() {
+    let response = await fetch(`http://localhost:8080/api/config`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ bio, pfpURL }),
+    });
+    let responseObj = await response.json();
+    let responseMessage = responseObj.message;
+
+    console.log(responseMessage);
+
+    if (response.status == 201) {
+      console.log('success!!!');
+      window.location.replace('/profile');
+    } else {
+      bio = '';
+      pfpURL = '';
+    }
   }
 </script>
 
@@ -11,16 +31,20 @@
 
   <hr class="sep" />
 
+
   <form on:submit|preventDefault={onSubmit}>
+    <h4>Biography:</h4>
+    <textarea bind:value={bio} name="bio" placeholder="Talk about you! (max 80 chars)" maxlength="80" rows="2"></textarea>
+
+    <h4>Profile Picture Url:</h4>
     <input
       type="text"
-      bind:value={bio}
-      name="bio"
-      placeholder="bio"
+      bind:value={pfpURL}
+      name="pfpURL"
+      placeholder="www.thiscouldbeyourpfp.com/wow.png"
       autocomplete="off"
     />
 
-    <input type="file" id="pfp" name="pfp" accept="image/*" />
 
     <button type="submit" class="submit">submit</button>
   </form>
@@ -53,5 +77,13 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
+  }
+
+  h4 {
+    margin-bottom: 0.4rem;
+  }
+
+  textarea {
+    resize: none;
   }
 </style>

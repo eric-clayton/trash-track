@@ -2,8 +2,10 @@
   import { onMount } from 'svelte';
 
   let username = null;
+  let bio = null;
   let trashCount = null;
   let recycleCount = null;
+  let pfpURL = null;
 
   const xpPerLevel = 100;
   let remainingXP = null;
@@ -16,8 +18,10 @@
 
     if (response.status === 200) {
       username = responseObj.username;
+      bio = responseObj.bio;
       trashCount = responseObj.trashCount;
       recycleCount = responseObj.recycleCount;
+      pfpURL = responseObj.pfpURL;
       remainingXP = xpPerLevel - (responseObj.xp % xpPerLevel);
       level = responseObj.xp / xpPerLevel;
       progress = level - Math.floor(level);
@@ -28,11 +32,16 @@
 
 <div class="welcome">
   <h1>{username}.</h1>
+  {#if bio && bio !== ''}
+    <div class="bio">
+      <p>{bio}</p>
+    </div>
+  {/if}
 
   <hr class="sep" />
 
   <div class="profile">
-    <img class="pfp" src="https://townsquare.media/site/675/files/2019/08/67661039_2600194060216546_4230772670389551104_n-e1565265186272.jpg?w=980&q=75" alt=""/>
+    <img class="pfp" src={pfpURL} alt=""/>
     <div class="level">
       <h3>Level {level}</h3>
       <progress value={progress}></progress>
@@ -59,6 +68,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .bio {
+    width: 16rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    justify-content: center;
   }
 
   .sep {
@@ -99,16 +116,35 @@
     margin-left: 1rem;
   }
 
-  h3 {
-    margin-top: 1rem;
-  }
-
   .text-darkred {
     color: darkred;
+  }
+  
+  /* IE10 */
+  progress {
+    -webkit-appearance: none;
+    appearance: none;
+    color: salmon;
+  }
+
+  /* Firefox */
+  progress::-moz-progress-bar { 
+    background: salmon;  
+  }
+
+  /* Chrome */
+  progress::-webkit-progress-value {
+    background: salmon;
+  }
+
+  h3 {
+    margin-top: 1rem;
   }
 
   .pfp {
     height: 5rem;
     width: 5rem;
+    /* box-shadow: 0px 0px 10px lightgrey; */
+    border-radius: 0.6rem;
   }
 </style>
