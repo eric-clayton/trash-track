@@ -9,6 +9,7 @@
   import Add from './pages/Add.svelte';
   import Profile from './pages/Profile.svelte';
   import Update from './pages/Update.svelte';
+  import Config from './pages/Config.svelte';
   import Login from './pages/Login.svelte';
   import Test from './pages/Test.svelte';
 
@@ -46,6 +47,10 @@
 
       <Route path="/update">
         <Update />
+      </Route>
+
+      <Route path="/config">
+        <Config />
       </Route>
 
       <Route path="/login">

@@ -34,6 +34,10 @@ router.get('/update', ensureAuthenticatedNoUsername, (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
 });
 
+router.get('/config', ensureAuthenticatedNoUsername, (req, res) => {
+  res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
+});
+
 router.get('/test', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
 });

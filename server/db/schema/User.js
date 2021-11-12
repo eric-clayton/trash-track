@@ -6,8 +6,8 @@ class User {
     pfpURL = '',
     // year, month, day, hour, minute
     timeLastAdded = new Date(2002, 6, 5, 12, 30),
-    trashLocs = [],
-    recycleLocs = [],
+    trashCount = 0,
+    recycleCount = 0,
     friends = [],
     xp = 0
   ) {
@@ -16,8 +16,8 @@ class User {
     this.bio = bio;
     this.pfpURL = pfpURL;
     this.timeLastAdded = timeLastAdded;
-    this.trashLocs = trashLocs;
-    this.recycleLocs = recycleLocs;
+    this.trashCount = trashCount;
+    this.recycleCount = recycleCount;
     this.friends = friends;
     this.xp = xp;
   }
@@ -29,8 +29,8 @@ class User {
       'test bio...',
       'www.someurl.com',
       new Date(),
-      [{ lat: 0, lng: 0 }],
-      [{ lat: 0, lng: 0 }],
+      0,
+      0,
       ['testFriendOne, testFriendTwo'],
       999
     );

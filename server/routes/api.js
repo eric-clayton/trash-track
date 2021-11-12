@@ -3,7 +3,7 @@ const { coordClosest } = require('../util');
 const { canAddCoord } = require('../util');
 const { ensureAuthenticatedJson, ensureAuthenticatedNoUsernameJson, findUser } = require('../util');
 const { Bin } = require('../db/schema/Bin');
-const { isUser, isCoord } = require('../db/schemaChecker');
+const { isCoord } = require('../db/schemaChecker');
 const mongo = require('../db/db');
 
 const router = express.Router();
@@ -43,7 +43,7 @@ router.post('/api/add/:bintype', ensureAuthenticatedJson, async (req, res) => {
   const lat = req.body.lat;
   const lng = req.body.lng;
   const bintype = req.params.bintype;
-  const minMinutes = 10; // minutes
+  const minMinutes = 0.1; // minutes
 
   if (!bintype || (bintype !== 'trash' && bintype !== 'recycle')) {
     res.status(400).json({ error: 'Invalid url parameters, use "trash" or "recycle"' });
@@ -65,14 +65,20 @@ router.post('/api/add/:bintype', ensureAuthenticatedJson, async (req, res) => {
 
     const minDistance = 20; // distance in meters
     const isRecycle = bintype === 'trash' ? 0 : 1;
+    const newTrashCount = isRecycle ? user.trashCount : user.trashCount + 1;
+    const newRecycleCount = isRecycle ? user.recycleCount + 1 : user.recycleCount;
+    const newXP = isRecycle ? user.xp + 20 : user.xp + 10;
 
     if (await canAddCoord({ lat, lng }, minDistance)) {
-      const username = (await db.collection('users').findOne({ googleID: req.user.googleID }))
-        .username;
+      const username = user.username;
       const bin = new Bin(lat, lng, isRecycle, username);
-      await db
-        .collection('users')
-        .updateOne({ googleID: req.user.googleID }, { $currentDate: { timeLastAdded: true } });
+      await db.collection('users').updateOne(
+        { googleID: req.user.googleID },
+        {
+          $currentDate: { timeLastAdded: true },
+          $set: { trashCount: newTrashCount, recycleCount: newRecycleCount, xp: newXP },
+        }
+      );
       await db.collection('bins').insertOne(bin);
       res.status(201).json({ message: 'Success adding bin!' });
     } else {
@@ -112,10 +118,15 @@ router.patch('/api/update', ensureAuthenticatedNoUsernameJson, async (req, res) 
   }
 });
 
-router.get('/api/username', ensureAuthenticatedJson, async (req, res) => {
+router.get('/api/userdata', ensureAuthenticatedJson, async (req, res) => {
   try {
     const user = await findUser(req.user.googleID);
-    res.json({ username: user.username });
+    res.json({
+      username: user.username,
+      trashCount: user.trashCount,
+      recycleCount: user.recycleCount,
+      xp: user.xp,
+    });
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: 'Something went wrong on our end, please try again :(' });

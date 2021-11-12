@@ -2,42 +2,62 @@
   import { onMount } from 'svelte';
 
   let username = null;
+  let trashCount = null;
+  let recycleCount = null;
+
+  const xpPerLevel = 100;
+  let remainingXP = null;
+  let level = null;
+  let progress = 0;
 
   onMount(async () => {
-    let response = await fetch(`http://localhost:8080/api/username`);
+    let response = await fetch(`http://localhost:8080/api/userdata`);
     let responseObj = await response.json();
 
     if (response.status === 200) {
       username = responseObj.username;
+      trashCount = responseObj.trashCount;
+      recycleCount = responseObj.recycleCount;
+      remainingXP = xpPerLevel - (responseObj.xp % xpPerLevel);
+      level = responseObj.xp / xpPerLevel;
+      progress = level - Math.floor(level);
+      level = Math.floor(level);
     }
   });
 </script>
 
 <div class="welcome">
-  <h1>Welcome to your profile!</h1>
-  <h3>{username}</h3>
+  <h1>{username}.</h1>
 
   <hr class="sep" />
 
-  <h2>Your stats:</h2>
+  <div class="profile">
+    <img class="pfp" src="https://townsquare.media/site/675/files/2019/08/67661039_2600194060216546_4230772670389551104_n-e1565265186272.jpg?w=980&q=75" alt=""/>
+    <div class="level">
+      <h3>Level {level}</h3>
+      <progress value={progress}></progress>
+      <p>XP until next level: {remainingXP}</p>
+    </div>
+  </div>
 
-  <ul class="features">
-    <li>890 Recycle Bins</li>
-    <li>540 Trash Bins</li>
-  </ul>
+  <h3>Logged Bins</h3>
+  <p>Trash Bins: <span class="text-darkred">{trashCount}</span></p>
+  <p>Recycle Bins: <span class="text-darkred">{recycleCount}</span></p>
 
-  xp bar right here
-
-  <a href="/logout">
-    <button class="signup">Logout :(</button>
-  </a>
+  <div class="buttons">
+    <a href="/config">
+      <button class="button hoverbg-lightblue"><img src="/assets/feather/tool.svg" alt=""></button>
+    </a>
+    <a href="/logout">
+      <button class="button hoverbg-lightred"><img src="/assets/feather/log-out.svg" alt=""></button>
+    </a>
+  </div>
 </div>
 
 <style>
   .welcome {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
 
@@ -47,24 +67,48 @@
     width: 100%;
   }
 
-  .features {
-    font-size: 13pt;
-    margin-top: 0.5rem;
+  .button {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  .signup {
-    padding-left: 5rem;
-    padding-right: 5rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    margin-top: 2rem;
+  .hoverbg-lightblue:hover {
+    background-color: lightblue;
   }
 
-  .signup:hover {
-    background-color: darkseagreen;
+  .hoverbg-lightred:hover {
+    background-color: indianred;
   }
 
-  ul {
-    list-style-position: inside;
+  .buttons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 10%;
+  }
+
+  .profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .level {
+    margin-left: 1rem;
+  }
+
+  h3 {
+    margin-top: 1rem;
+  }
+
+  .text-darkred {
+    color: darkred;
+  }
+
+  .pfp {
+    height: 5rem;
+    width: 5rem;
   }
 </style>
