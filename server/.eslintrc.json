@@ -9,9 +9,19 @@
     "ecmaVersion": 8
   },
   "rules": {
-    "no-console": ["error", {
-      "allow": ["log", "error", "warn"]
-    }],
+    "no-console": [
+      "error",
+      {
+        "allow": ["log", "error", "warn"]
+      }
+    ],
+    "operator-linebreak": [
+      "error",
+      "after",
+      {
+        "overrides": { "?": "before", ":": "before" }
+      }
+    ],
     "arrow-body-style": ["error", "always"],
     "no-prototype-builtins": "off",
     "prefer-destructuring": "off",
