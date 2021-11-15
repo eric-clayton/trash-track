@@ -1,0 +1,30 @@
+{
+  "env": {
+    "node": true,
+    "commonjs": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "airbnb-base"],
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
+  "rules": {
+    "no-console": [
+      "error",
+      {
+        "allow": ["log", "error", "warn"]
+      }
+    ],
+    "operator-linebreak": [
+      "error",
+      "after",
+      {
+        "overrides": { "?": "before", ":": "before" }
+      }
+    ],
+    "arrow-body-style": ["error", "always"],
+    "no-prototype-builtins": "off",
+    "prefer-destructuring": "off",
+    "comma-dangle": "off"
+  }
+}

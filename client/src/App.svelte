@@ -7,6 +7,11 @@
   import Home from './pages/Home.svelte';
   import Find from './pages/Find.svelte';
   import Add from './pages/Add.svelte';
+  import Profile from './pages/Profile.svelte';
+  import Update from './pages/Update.svelte';
+  import Config from './pages/Config.svelte';
+  import Login from './pages/Login.svelte';
+  import Test from './pages/Test.svelte';
 
   let linkArray = [
     { name: 'Home', address: '/home' },
@@ -24,7 +29,6 @@
 
   <Router>
     <div>
-
       <Route path="/home">
         <Home />
       </Route>
@@ -37,6 +41,28 @@
         <Add />
       </Route>
 
+      <Route path="/profile">
+        <Profile />
+      </Route>
+
+      <Route path="/update">
+        <Update />
+      </Route>
+
+      <Route path="/config">
+        <Config />
+      </Route>
+
+      <Route path="/login">
+        <Login />
+      </Route>
+
+      <!-- 
+        TODO: remove this
+      -->
+      <Route path="/test">
+        <Test />
+      </Route>
     </div>
   </Router>
 </main>

@@ -1,10 +1,11 @@
 <script>
   import { onMount } from 'svelte';
   import { onDestroy } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
   import * as L from 'leaflet';
   import { coordArray } from '../stores.js';
-  import { clickedCoords } from '../stores.js';
 
+  const dispatch = createEventDispatcher();
   export let width;
   export let height;
   let coordStore;
@@ -16,7 +17,6 @@
   });
 
   onDestroy(() => {
-    clickedUnsubscribe();
     coordUnsubscribe();
   });
 
@@ -29,9 +29,7 @@
     }).addTo(map);
 
     map.on('click', (e) => {
-      clickedCoords.update((value) => {
-        return {lat: e.latlng.lat.toPrecision(8), lng: e.latlng.lng.toPrecision(8)};
-      });
+      dispatch('mapClick', { lat: e.latlng.lat.toPrecision(7), lng: e.latlng.lng.toPrecision(7) });
     });
 
     markers.addTo(map);
@@ -48,7 +46,11 @@
   $: (() => {
     markers.clearLayers();
     coordStore.forEach((coord) => {
-      markers.addLayer(L.marker([coord.lat, coord.lng], { icon: trashIcon }));
+      markers.addLayer(
+        L.marker([coord.lat, coord.lng] /* { icon: trashIcon }*/).on('click', (event) => {
+          window.location.href = `https://www.google.com/maps/place/${event.latlng.lat}+${event.latlng.lng}`;
+        })
+      );
     });
   })();
 </script>

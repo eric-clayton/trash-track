@@ -4,21 +4,38 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npx nodemon",
-    "start": "node index.js",
+    "dev": "run-script-os",
+    "predev:nix": "mongod --dbpath ../local-mongo &> /dev/null &",
+    "dev:nix": "nodemon",
+    "predev:windows": "start mongod --dbpath ../local-mongo",
+    "dev:windows": "nodemon",
+    "start": "run-script-os",
+    "prestart:nix": "mongod --dbpath ../local-mongo &> /dev/null &",
+    "start:nix": "node index.js",
+    "prestart:windows": "start mongod --dbpath ../local-mongo",
+    "start:windows": "node index.js",
     "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.2",
+    "cookie-parser": "^1.4.5",
+    "cookie-session": "^1.4.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jest": "^27.3.1",
+    "mongodb": "^4.1.4",
     "passport": "^0.5.0",
-    "passport-google-oauth20": "^2.0.0",
+    "passport-google-oauth2": "^0.2.0",
     "round-to": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2",
+    "nodemon": "^2.0.12",
+    "run-script-os": "^1.1.6"
   }
 }

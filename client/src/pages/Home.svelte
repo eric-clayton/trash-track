@@ -5,7 +5,7 @@
   <h1>Welcome to Trash Track!</h1>
   <h3>Saving the world one 🗑️ at a time.</h3>
 
-  <hr class="sep">
+  <hr class="sep" />
 
   <h2>What can you do with Trash Track?</h2>
 
@@ -16,7 +16,9 @@
     <li>Keep track of your favorite bin locations 📝</li>
   </ul>
 
-  <button class="signup">Sign me up!</button>
+  <a href="/auth/google">
+    <button class="signup">Sign me up!</button>
+  </a>
 </div>
 
 <style>
@@ -37,7 +39,7 @@
     font-size: 13pt;
     margin-top: 0.5rem;
   }
-  
+
   .signup {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -53,5 +55,4 @@
   ul {
     list-style-position: inside;
   }
-
 </style>

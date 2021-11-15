@@ -1,5 +1,8 @@
 /client/node_modules/
 /client/public/build/
 /server/node_modules/
+/local-mongo/*
+!/local-mongo/.gitkeep
+.env
 
 .DS_Store
