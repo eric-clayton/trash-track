@@ -23,6 +23,25 @@
       pfpURL = '';
     }
   }
+
+  async function onDelete() {
+    let userDataResponse = await fetch(`http://localhost:8080/api/userdata`);
+    let userObj = await userDataResponse.json();
+    let username = userObj.username;
+
+    let deleteResponse = await fetch(`http://localhost:8080/api/user/${username}`, {
+      method: 'DELETE',
+    });
+    let deleteObj = await deleteResponse.json();
+    let deleteMessage = deleteObj.message;
+
+    console.log(deleteMessage);
+
+    if (deleteResponse.status == 200) {
+      console.log('deleted!!!');
+      window.location.replace('/home');
+    }
+  }
 </script>
 
 <div class="welcome">
@@ -31,10 +50,15 @@
 
   <hr class="sep" />
 
-
   <form on:submit|preventDefault={onSubmit}>
     <h4>Biography:</h4>
-    <textarea bind:value={bio} name="bio" placeholder="Talk about you! (max 80 chars)" maxlength="80" rows="2"></textarea>
+    <textarea
+      bind:value={bio}
+      name="bio"
+      placeholder="Talk about you! (max 80 chars)"
+      maxlength="80"
+      rows="2"
+    />
 
     <h4>Profile Picture Url:</h4>
     <input
@@ -45,9 +69,12 @@
       autocomplete="off"
     />
 
-
-    <button type="submit" class="submit">submit</button>
+    <button type="submit" class="submit">Submit</button>
   </form>
+
+  <button on:click={onDelete} type="button" class="delete-button hoverbg-lightred"
+    >Delete Account<img src="/assets/feather/user-x.svg" alt="Delete User" /></button
+  >
 
   <!--
   <a href="/logout">
@@ -68,6 +95,21 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     width: 100%;
+  }
+
+  .delete-button {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .delete-button img {
+    margin-left: 0.8rem;
+  }
+
+  .hoverbg-lightred:hover {
+    background-color: indianred;
   }
 
   form {

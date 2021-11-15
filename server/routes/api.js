@@ -43,7 +43,7 @@ router.post('/api/add/:bintype', ensureAuthenticatedJson, async (req, res) => {
   const lat = req.body.lat;
   const lng = req.body.lng;
   const bintype = req.params.bintype;
-  const minMinutes = 0.1; // minutes
+  const minMinutes = 10; // minutes
 
   if (!bintype || (bintype !== 'trash' && bintype !== 'recycle')) {
     res.status(400).json({ error: 'Invalid url parameters, use "trash" or "recycle"' });
@@ -158,6 +158,28 @@ router.get('/api/userdata', ensureAuthenticatedJson, async (req, res) => {
       pfpURL: user.pfpURL,
       xp: user.xp,
     });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: 'Something went wrong on our end, please try again :(' });
+  }
+});
+
+router.delete('/api/user/:username', ensureAuthenticatedJson, async (req, res) => {
+  try {
+    const user = await findUser(req.user.googleID);
+    if (req.params.username === user.username) {
+      const db = mongo.get();
+      const deleteResult = await db.collection('users').deleteOne({ googleID: req.user.googleID });
+      if (deleteResult.acknowledged !== true) {
+        throw new Error("Mongo couldn't delete requested user for some reason...");
+      } else {
+        res.status(200).json({ message: 'Successfully delete user...' });
+      }
+    } else {
+      res
+        .status(401)
+        .json({ message: 'Requested user to delete does not match the authenticated user...' });
+    }
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: 'Something went wrong on our end, please try again :(' });

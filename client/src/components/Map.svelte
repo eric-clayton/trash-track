@@ -46,7 +46,11 @@
   $: (() => {
     markers.clearLayers();
     coordStore.forEach((coord) => {
-      markers.addLayer(L.marker([coord.lat, coord.lng], { icon: trashIcon }));
+      markers.addLayer(
+        L.marker([coord.lat, coord.lng] /* { icon: trashIcon }*/).on('click', (event) => {
+          window.location.href = `https://www.google.com/maps/place/${event.latlng.lat}+${event.latlng.lng}`;
+        })
+      );
     });
   })();
 </script>

@@ -41,10 +41,10 @@
   <hr class="sep" />
 
   <div class="profile">
-    <img class="pfp" src={pfpURL} alt=""/>
+    <img class="pfp" src={pfpURL} alt="" />
     <div class="level">
       <h3>Level {level}</h3>
-      <progress value={progress}></progress>
+      <progress value={progress} />
       <p>XP until next level: {remainingXP}</p>
     </div>
   </div>
@@ -55,10 +55,13 @@
 
   <div class="buttons">
     <a href="/config">
-      <button class="button hoverbg-lightblue"><img src="/assets/feather/tool.svg" alt=""></button>
+      <button class="button hoverbg-lightblue"><img src="/assets/feather/tool.svg" alt="" /></button
+      >
     </a>
     <a href="/logout">
-      <button class="button hoverbg-lightred"><img src="/assets/feather/log-out.svg" alt=""></button>
+      <button class="button hoverbg-lightred"
+        ><img src="/assets/feather/log-out.svg" alt="" /></button
+      >
     </a>
   </div>
 </div>
@@ -119,7 +122,7 @@
   .text-darkred {
     color: darkred;
   }
-  
+
   /* IE10 */
   progress {
     -webkit-appearance: none;
@@ -128,8 +131,8 @@
   }
 
   /* Firefox */
-  progress::-moz-progress-bar { 
-    background: salmon;  
+  progress::-moz-progress-bar {
+    background: salmon;
   }
 
   /* Chrome */
