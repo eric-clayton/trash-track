@@ -48,6 +48,20 @@
     lng = '';
   }
 
+  function geolocation()
+  {
+      if('geolocation' in navigator) {
+        console.log('geolocation is available');
+        navigator.geolocation.getCurrentPosition((position) => {;
+          lat = position.coords.latitude;
+          lng = position.coords.longitude;
+          console.log(position.coords.latitude, position.coords.longitude);
+      });
+      }
+      else {
+      console.log('geolocation is not available');
+      }
+  }
   function loadTestPoints() {
     coordArray.update((value) => {
       return [...value, ...testPoints];
@@ -70,7 +84,7 @@
 </script>
 
 <form on:submit|preventDefault={onSubmit}>
-  <button type="button" on:click={() => console.log('implement me!')}>geolocation</button>
+  <button type="button" on:click={() => geolocation()}>geolocation</button>
   <input type="text" bind:value={lat} name="lat" placeholder="latitude" autocomplete="off" />
   <input type="text" bind:value={lng} name="lng" placeholder="longitude" autocomplete="off" />
   <button type="submit">submit</button>
