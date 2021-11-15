@@ -48,19 +48,17 @@
     lng = '';
   }
 
-  function geoLocation()
-  {
-      if('geolocation' in navigator) {
-        // console.log('geolocation is available');
-        navigator.geolocation.getCurrentPosition((position) => {
-          lat = position.coords.latitude;
-          lng = position.coords.longitude;
-          // console.log(position.coords.latitude, position.coords.longitude);
-        });
-      }
-      else {
-        console.log('Geolocation not available on this client.');
-      }
+  function geoLocation() {
+    if ('geolocation' in navigator) {
+      // console.log('geolocation is available');
+      navigator.geolocation.getCurrentPosition((position) => {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        // console.log(position.coords.latitude, position.coords.longitude);
+      });
+    } else {
+      console.log('Geolocation not available on this client.');
+    }
   }
 
   function loadTestPoints() {
