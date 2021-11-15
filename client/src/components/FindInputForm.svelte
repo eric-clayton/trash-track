@@ -48,20 +48,21 @@
     lng = '';
   }
 
-  function geolocation()
+  function geoLocation()
   {
       if('geolocation' in navigator) {
-        console.log('geolocation is available');
-        navigator.geolocation.getCurrentPosition((position) => {;
+        // console.log('geolocation is available');
+        navigator.geolocation.getCurrentPosition((position) => {
           lat = position.coords.latitude;
           lng = position.coords.longitude;
-          console.log(position.coords.latitude, position.coords.longitude);
-      });
+          // console.log(position.coords.latitude, position.coords.longitude);
+        });
       }
       else {
-      console.log('geolocation is not available');
+        console.log('Geolocation not available on this client.');
       }
   }
+
   function loadTestPoints() {
     coordArray.update((value) => {
       return [...value, ...testPoints];
@@ -84,7 +85,7 @@
 </script>
 
 <form on:submit|preventDefault={onSubmit}>
-  <button type="button" on:click={() => geolocation()}>geolocation</button>
+  <button type="button" on:click={geoLocation}>geoLocation</button>
   <input type="text" bind:value={lat} name="lat" placeholder="latitude" autocomplete="off" />
   <input type="text" bind:value={lng} name="lng" placeholder="longitude" autocomplete="off" />
   <button type="submit">submit</button>
