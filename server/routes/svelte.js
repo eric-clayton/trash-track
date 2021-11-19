@@ -26,6 +26,10 @@ router.get('/profile', ensureAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
 });
 
+router.get('/profile/:username', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
+});
+
 router.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index.html'));
 });

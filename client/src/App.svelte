@@ -8,6 +8,7 @@
   import Find from './pages/Find.svelte';
   import Add from './pages/Add.svelte';
   import Profile from './pages/Profile.svelte';
+  import PublicProfile from './pages/PublicProfile.svelte';
   import Update from './pages/Update.svelte';
   import Config from './pages/Config.svelte';
   import Login from './pages/Login.svelte';
@@ -43,6 +44,10 @@
 
       <Route path="/profile">
         <Profile />
+      </Route>
+
+      <Route path="/profile/*">
+        <PublicProfile />
       </Route>
 
       <Route path="/update">

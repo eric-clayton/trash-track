@@ -63,7 +63,7 @@ router.post('/api/add/:bintype', ensureAuthenticatedJson, async (req, res) => {
       return;
     }
 
-    const minDistance = 20; // distance in meters
+    const minDistance = 10; // distance in meters
     const isRecycle = bintype === 'trash' ? 0 : 1;
     const newTrashCount = isRecycle ? user.trashCount : user.trashCount + 1;
     const newRecycleCount = isRecycle ? user.recycleCount + 1 : user.recycleCount;
@@ -158,6 +158,28 @@ router.get('/api/userdata', ensureAuthenticatedJson, async (req, res) => {
       pfpURL: user.pfpURL,
       xp: user.xp,
     });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: 'Something went wrong on our end, please try again :(' });
+  }
+});
+
+router.get('/api/userdata/:username', async (req, res) => {
+  try {
+    const db = mongo.get();
+    const user = await db.collection('users').findOne({ username: req.params.username });
+    if (user) {
+      res.json({
+        username: user.username,
+        bio: user.bio,
+        trashCount: user.trashCount,
+        recycleCount: user.recycleCount,
+        pfpURL: user.pfpURL,
+        xp: user.xp,
+      });
+    } else {
+      res.status(404).json({ message: 'Username does not exist in the database...' });
+    }
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: 'Something went wrong on our end, please try again :(' });
