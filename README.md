@@ -1,4 +1,4 @@
-# 11282group44
+### 11282group44
 
 Member 1: Joseph Somerdin
 \
@@ -12,20 +12,12 @@ Member 4: Giovanni Cornejo
 
 # trash-track
 
-## A web-application to track trash bins and recycling bins.
+A web-application to track trash/recycling bins.
 
-*You will need to have Node.js installed (This project uses v14.18.1). Install it using nvm: [unix](https://github.com/nvm-sh/nvm) / [windows](https://github.com/coreybutler/nvm-windows).*
+## Build/Run Instructions
 
-```bash
-nvm install 14.18.1
-nvm use 14.18.1
-```
-
-*You will also need MongoDB installed to host the local database: install it [here](https://www.mongodb.com/try/download/community).*
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/), install the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
-
-## How to work on the code
+- Install Node.js [here](https://nodejs.org/en/) (v16.13.0 tested working)
+- Install MongoDB [here](https://www.mongodb.com/try/download/community) (Add install directory to path on windows)
 
 Clone the repository:
 
@@ -36,43 +28,38 @@ git clone https://github.com/asleeponpluto/11282group44.git
 Install node dependencies:
 
 ```bash
-cd 11282group44/client
+cd 11282group44/server
 npm install
-cd ../server
+cd ../client
 npm install
 ```
 
-## Starting the application
-
-When working on the app, it is best to run the client and the server simultaneously so that you don't need to rebuild the svelte app everytime you make changes.
-\
-\
-Start a local mongo instance:
+Build Svelte frontend:
 ```bash
-# dbpath can be wherever, this is just an example
-mongod --dbpath ~/Projects/11282group44/local-mongo
-```
-
-Start the client (you should be in the client folder):
-
-```bash
-npm run dev
-```
-
-Start the server (you should be in the server folder):
-
-```bash
-npm run dev
-```
-
-Now navigate to `http://localhost:8080` in your browser to see live changes.
-
-## Building the client for production
-
-Build an optimised version of the app (you should be in the client folder):
-
-```bash
+# must be in client directory
 npm run build
 ```
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+Run server:
+```bash
+# must be in server directory
+npm run start
+```
+
+Now navigate to `http://localhost:8080` in your browser.
+
+## Using auto-reload when working on the app
+
+Auto-reload Svelte frontend:
+```bash
+# must be in client directory
+npm run dev
+```
+
+Auto-reload server:
+```bash
+# must be in server directory
+npm run dev
+```
+
+Now navigate to `http://localhost:8080` in your browser.

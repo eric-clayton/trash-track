@@ -25,10 +25,10 @@ const testPoints = [
 
 async function main() {
   /* Connect to Mongo server, load test points */
-
   await mongo.connect();
   console.log('\nSuccessfully connected to MongoDB server.');
 
+  /* Reset Mongo database and insert test points */
   const db = mongo.get();
   await db.collection('coordinates').deleteMany({});
   await db.collection('bins').deleteMany({});
@@ -41,7 +41,6 @@ async function main() {
   pass.init();
 
   /* Express */
-
   app.use(express.json());
   app.use(
     cookieSession({
