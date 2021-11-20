@@ -25,23 +25,22 @@ const testPoints = [
 
 async function main() {
   /* Connect to Mongo server, load test points */
-
   await mongo.connect();
   console.log('\nSuccessfully connected to MongoDB server.');
 
-  const db = mongo.get();
-  await db.collection('coordinates').deleteMany({});
-  await db.collection('bins').deleteMany({});
-  await db.collection('users').deleteMany({});
-  console.log(chalk.red('Cleared database.'));
-  await db.collection('bins').insertMany(testPoints);
-  console.log(chalk.red('Inserted test bins into database.\n'));
+  /* Reset Mongo database and insert test points */
+  // const db = mongo.get();
+  // await db.collection('coordinates').deleteMany({});
+  // await db.collection('bins').deleteMany({});
+  // await db.collection('users').deleteMany({});
+  // console.log(chalk.red('Cleared database.'));
+  // await db.collection('bins').insertMany(testPoints);
+  // console.log(chalk.red('Inserted test bins into database.\n'));
 
   /* Initialize Passport */
   pass.init();
 
   /* Express */
-
   app.use(express.json());
   app.use(
     cookieSession({

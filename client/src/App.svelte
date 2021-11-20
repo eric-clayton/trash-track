@@ -12,7 +12,6 @@
   import Update from './pages/Update.svelte';
   import Config from './pages/Config.svelte';
   import Login from './pages/Login.svelte';
-  import Test from './pages/Test.svelte';
 
   let linkArray = [
     { name: 'Home', address: '/home' },
@@ -60,13 +59,6 @@
 
       <Route path="/login">
         <Login />
-      </Route>
-
-      <!-- 
-        TODO: remove this
-      -->
-      <Route path="/test">
-        <Test />
       </Route>
     </div>
   </Router>
