@@ -22,13 +22,13 @@ A web-application to track trash/recycling bins.
 Clone the repository:
 
 ```bash
-git clone https://github.com/asleeponpluto/11282group44.git
+git clone https://github.com/asleeponpluto/trash-track.git
 ```
 
 Install node dependencies:
 
 ```bash
-cd 11282group44/server
+cd trash-track/server
 npm install
 cd ../client
 npm install
