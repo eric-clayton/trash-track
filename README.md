@@ -13,6 +13,11 @@ Member 4: Giovanni Cornejo
 # trash-track
 
 A web-application to track trash/recycling bins.
+Demos
+
+![](https://github.com/eric-clayton/trash-track/edit/master/Demos/Demo1)
+![](https://github.com/eric-clayton/trash-track/edit/master/Demos/Demo2)
+![](https://github.com/eric-clayton/trash-track/edit/master/Demos/Demo3)
 
 ## Build/Run Instructions
 
